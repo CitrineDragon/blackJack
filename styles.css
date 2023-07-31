@@ -1,0 +1,72 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: black !important;
+  color: white !important;
+  overflow: hidden;
+}
+
+button {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+#result {
+  height: 24px;
+  color: yellow;
+  line-height: 24px;
+  text-align: center;
+  animation-duration: 0.5s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  0% {
+    color: yellow;
+    font-size: 1.05rem;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.dealer,
+.player {
+  background: darkgreen;
+  min-height: 115px;
+}
+
+img {
+  display: block;
+}
+
+.cardImg {
+  height: 120px;
+  /* width: calc(65vw / 5);
+  max-width: calc(1000px / 5); */
+  padding: 0.5rem 0.25rem;
+}
+
+#dealer-hand,
+#player-hand {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
