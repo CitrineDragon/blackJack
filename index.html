@@ -4,38 +4,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
   <title>Blackjack</title>
 </head>
 
 <body>
-  <div id="main" class="container-lg">
-    <h1 class="justify-content-start">Blackjack</h1>
+  <div id="main" class="container-sm">
+    <h1 class="text-info justify-content-start">Blackjack</h1>
     <p id="result"></p>
 
     <div id="game">
-      <h4>Dealer</h4>
-      <div class="dealer border border-dark rounded mb-3">
+      <h4>Dealer <span class="dealerWins"> 0 Wins</span></h4>
+      <div class="dealer border border-dark rounded mb-2">
         <div id="dealer-hand"></div>
       </div>
-      <h4>Player</h4>
-      <div class="player border border-dark rounded mb-3">
+      <h4>Player <span class="playerWins"> 0 Wins</span></h4>
+      <div class="player border border-dark rounded mb-2">
         <div id="player-hand"></div>
       </div>
 
     </div>
 
-    <div class="py-3">
+    <div class="py-1">
       <div class="row gx-5">
-        <div class="col pb-3">
-          <button id="start" class="btn btn-light border border-dark">Deal</button>
+        <div class="col pb-2">
+          <button id="start" class="btn btn-outline-info shadow-none border border-dark">Deal</button>
         </div>
-        <div class="col pb-3">
-          <button id="hit" class="btn btn-light border border-dark">Hit</button>
+        <div class="col pb-2">
+          <button id="hit" class="btn btn-outline-info shadow-none border border-dark">Hit</button>
         </div>
-        <div class="col pb-3">
-          <button id="stand" class="btn btn-light border border-dark">Stand</button>
+        <div class="col pb-2">
+          <button id="stand" class="btn btn-outline-info shadow-none border border-dark">Stand</button>
         </div>
       </div>
 

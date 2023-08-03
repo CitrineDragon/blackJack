@@ -1,3 +1,12 @@
+:root {
+  --width-xs: 350px;
+  --width-sm: 576px;
+  --width-md: 768px;
+  --width-lg: 992px;
+  --width-xl: 1200px;
+  --width-xxl: 1400px;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -5,8 +14,8 @@
 }
 
 body {
-  background: black !important;
-  color: white !important;
+  background: black;
+  color: white;
   overflow: hidden;
 }
 
@@ -16,6 +25,12 @@ button {
 
 h1 {
   text-align: center;
+}
+
+h4 {
+  color: #0dcaf0;
+  font-size: 1rem;
+  margin-bottom: 0;
 }
 
 #result {
@@ -49,7 +64,6 @@ h1 {
 .dealer,
 .player {
   background: darkgreen;
-  min-height: 115px;
 }
 
 img {
@@ -57,16 +71,120 @@ img {
 }
 
 .cardImg {
-  height: 100px;
-  /* width: calc(65vw / 5);
-  max-width: calc(1000px / 5); */
-  padding: 0.5rem 0.25rem;
+  width: calc((var(--width-xs) - 50px) / 5);
+  margin: 3px;
 }
 
 #dealer-hand,
 #player-hand {
-  height: 120px;
+  height: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dealerWins,
+.playerWins {
+  color: white;
+  padding-left: 1rem;
+}
+
+/* *******************Media Queries *********************** */
+
+@media screen and (min-width: 576px) {
+  .cardImg {
+    width: calc((var(--width-xs) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 90px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+  .cardImg {
+    width: calc((var(--width-sm) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 153px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media screen and (min-width: 992px) {
+  .cardImg {
+    width: calc((var(--width-md) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 206px;
+  }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+  .cardImg {
+    width: calc((var(--width-lg) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 268px;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media screen and (min-width: 1400px) {
+  .cardImg {
+    width: calc((var(--width-xl) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 328px;
+  }
+}
+
+/* *************** Landscape Mode ********************** */
+
+@media screen and (max-height: 415px) and (min-width: 700px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .cardImg {
+    width: calc((var(--width-xs) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 90px;
+  }
+}
+
+@media screen and (max-height: 415px) and (min-width: 800px) {
+  .cardImg {
+    width: calc((var(--width-xs) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 90px;
+  }
+}
+
+@media screen and (max-height: 912px) and (min-width: 1000px) {
+  .cardImg {
+    width: calc((var(--width-sm) - 50px) / 5);
+  }
+
+  #dealer-hand,
+  #player-hand {
+    height: 152px;
+  }
 }

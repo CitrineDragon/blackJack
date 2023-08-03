@@ -4,10 +4,15 @@ const API_BASE_URL = 'https://www.deckofcardsapi.com/api/deck';
 const dealerDiv = document.getElementById('dealer-hand');
 const playerDiv = document.getElementById('player-hand');
 const result = document.getElementById('result');
+const dealerWins = document.querySelector('.dealerWins');
+const playerWins = document.querySelector('.playerWins');
 
 let deckId = '';
+let playerTurn = true;
 let playerHand = [];
 let dealerHand = [];
+let dealerCount = 0;
+let playerCount = 0;
 
 async function getDeck() {
   try {
@@ -33,6 +38,7 @@ async function startGame() {
     await shuffleDeck();
     emptyHands();
     result.textContent = '';
+    playerTurn = true;
 
     const res = await fetch(`${API_BASE_URL}/${deckId}/draw/?count=4`);
     const data = await res.json();
@@ -42,7 +48,7 @@ async function startGame() {
     playerHand.push(data.cards[2]);
     dealerHand.push(data.cards[3]);
 
-    updateGame();
+    await updateGame();
   } catch (error) {
     console.error('Error while starting the game:', error);
   }
@@ -78,18 +84,14 @@ async function updateGame() {
       dealerDiv.append(img);
     }
   });
+  checkWinner();
 
-  //Check for Blackjack then check for Bust
-  if (hasBlackjack(playerHand)) {
-    result.textContent = 'Blackjack! Player wins!';
-  } else if (hasBlackjack(dealerHand)) {
-    result.textContent = 'Blackjack! Dealer wins!';
-    document.querySelector('.hiddenCard').src = `${dealerHand[1].image}`;
-  } else if (isBust(playerHand)) {
-    result.textContent = 'Bust! Dealer wins!';
-  } else if (isBust(dealerHand)) {
-    result.textContent = 'Dealer busts! Player wins!';
-  }
+  dealerWins.textContent = `${dealerCount} ${
+    dealerCount === 1 ? `Win` : `Wins`
+  }`;
+  playerWins.textContent = `${playerCount} ${
+    playerCount === 1 ? `Win` : `Wins`
+  }`;
 }
 
 // Emptys both hands
@@ -107,31 +109,59 @@ async function draw(arr) {
   } catch (error) {
     console.error('Error while drawing a card:', error);
   }
-  updateGame();
 }
 
 // ========== Player Actions ==========
 // Hit: Deal a card to the player
 async function hit() {
   await draw(playerHand);
-  updateGame();
+  await updateGame();
 }
 
 // Stand: Dealer plays their hand
 async function stand() {
+  playerTurn = false;
   while ((await calculateHandValue(dealerHand)) < 17) {
     await draw(dealerHand);
   }
+
   updateGame();
   document.querySelector('.hiddenCard').src = `${dealerHand[1].image}`;
+}
 
-  if (
-    calculateHandValue(dealerHand) >= calculateHandValue(playerHand) &&
-    calculateHandValue(dealerHand) <= 21
+function checkWinner() {
+  //Check for Blackjack
+  if (hasBlackjack(playerHand)) {
+    result.textContent = 'Blackjack! Player wins!';
+    playerCount++;
+    console.log('phb');
+  } else if (hasBlackjack(dealerHand)) {
+    result.textContent = 'Blackjack! Dealer wins!';
+    document.querySelector('.hiddenCard').src = `${dealerHand[1].image}`;
+    dealerCount++;
+    console.log('dhb');
+  } else if (isBust(playerHand)) {
+    result.textContent = 'Bust! Dealer wins!';
+    dealerCount++;
+    console.log('pb');
+  } else if (isBust(dealerHand)) {
+    result.textContent = 'Dealer busts! Player wins!';
+    playerCount++;
+    console.log('db');
+  } else if (
+    playerTurn === false &&
+    calculateHandValue(dealerHand) >= calculateHandValue(playerHand)
   ) {
     result.textContent = 'Dealer wins!';
-  } else {
+    dealerCount++;
+    console.log('dw');
+  } else if (
+    playerTurn === false &&
+    calculateHandValue(playerHand) >= calculateHandValue(dealerHand)
+  ) {
     result.textContent = 'Player wins!';
+    playerCount++;
+    console.log('pw');
   }
 }
 
